@@ -9,6 +9,7 @@ function Create() {
   const handleAdd = () => {
     axios.post('http://localhost:3001/add', {task: task}).then(result => console.log(result))
     .catch(err => console.log(`ERror occured ${err}`));
+    
   }
   return (
     <div className="" style={{ display: "flex", gap: "6px" }}>
