@@ -6,9 +6,6 @@ import { Checkbox } from "./components/ui/checkbox";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import {
   Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "./components/ui/card";
@@ -57,10 +54,16 @@ export default function Home() {
     // get
   }, []);
   const handleEdit = (id) => {
-    console.log(id)
     axios.put('http://localhost:3001/update/' + id)
-    .then((result) => console.log(result))
+    .then((result) => {window.location.reload()})
     .catch((err) => console.log(err))
+  }
+
+  const handleDelete = (id) => {
+    axios.delete('http://localhost:3001/delete/' + id)
+    .then((result) => {window.location.reload()})
+    .catch((err) => console.log(err))
+
   }
   console.log(todos.id);
   return (
@@ -87,7 +90,7 @@ export default function Home() {
           </div>
         ) : (
           todos
-          .filter(todo => !todo.done)
+          // .filter(todo => !todo.done)
           .map((todo) => (
             <div className={hoverStyle} key={todo._id}>
               <div className="items">
@@ -98,7 +101,7 @@ export default function Home() {
                       <CardTitle className="font-normal text-lg">{todo.task}</CardTitle>
                     </CardHeader>
                   </div>
-                  <DeleteIcon className="ml-auto" />
+                  <DeleteIcon className="ml-auto" onClick={() => handleDelete(todo._id)}/>
                 </Card>
               </div>
             </div>
