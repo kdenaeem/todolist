@@ -8,6 +8,7 @@ function Create({getTodos}){
   const [task, setTask] = useState("")
   
   const handleAdd = () => {
+    console.log("hello")
     axios.post('http://localhost:3001/add', {task: task})
     .then(result => 
       {console.log(result);

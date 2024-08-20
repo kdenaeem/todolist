@@ -13,7 +13,7 @@ import {
 const color = "";
 
 export default function Home() {
-  const [todos, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
   const hoverStyle = css`
     padding: 8px;
     font-size: 14px;
@@ -46,7 +46,9 @@ export default function Home() {
   const getTodos = () => {
     axios
     .get("http://localhost:3001/get")
-    .then((result) => setTodo(result.data))
+    .then((result) => {setTodos(result.data);
+      console.log(result.data)
+    })
     .catch((err) => console.log(err));
   }
   useEffect(() => {
