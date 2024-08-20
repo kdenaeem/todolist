@@ -4,12 +4,13 @@ import { Button } from "@mui/material";
 import axios from "axios";
 
 
-function Create() {
+function Create({getTodos}){
   const [task, setTask] = useState()
+  
   const handleAdd = () => {
     axios.post('http://localhost:3001/add', {task: task}).then(result => console.log(result))
     .catch(err => console.log(`ERror occured ${err}`));
-    
+    getTodos()
   }
   return (
     <div className="" style={{ display: "flex", gap: "6px" }}>

@@ -46,12 +46,15 @@ export default function Home() {
     }
   `;
 
-  useEffect(() => {
-    // get
+  const getTodos = () => {
     axios
-      .get("http://localhost:3001/get")
-      .then((result) => setTodo(result.data))
-      .catch((err) => console.log(err));
+    .get("http://localhost:3001/get")
+    .then((result) => setTodo(result.data))
+    .catch((err) => console.log(err));
+  }
+  useEffect(() => {
+    getTodos();
+    // get
   }, []);
   const handleEdit = (id) => {
     console.log(id)
@@ -76,7 +79,7 @@ export default function Home() {
         <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-black mx-auto	">
           Todo List
         </h1>
-        <Create />
+        <Create getTodos={getTodos}/>
         {todos.length === 0 ? (
           <div>
             {" "}
@@ -86,7 +89,7 @@ export default function Home() {
           todos
           .filter(todo => !todo.done)
           .map((todo) => (
-            <div className={hoverStyle}>
+            <div className={hoverStyle} key={todo._id}>
               <div className="items">
                 <Card className="flex flex-row items-center p-4 h-16 md:h-166 lg:h-16 rounded-3xl">
                   <div className="flex items-center mr-14">
